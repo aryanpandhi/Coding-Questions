@@ -25,6 +25,20 @@ class Arrays{
         assert oneEditAway("", "");
         assert oneEditAway("to","toe");
         assert oneEditAway("bee", "be");
+        /* compress Tests */
+        assert compress("aaabbbdef").equals("a3b3d1e1f1");
+        assert compress("").equals("");
+        assert compress("aabbcc").equals("aabbcc");
+        /* rotate Tests */
+        assert rotate(new int[][] {
+            new int[] { 1, 2, 3 },
+            new int[] { 4, 5, 6},
+            new int[] {7, 8, 9}
+        }).equals(new int[][] {
+            new int[] { 7, 4, 1},
+            new int[] { 8, 5, 2},
+            new int[] {9, 6, 3}
+        });
         System.out.println("All Tests Passed!");
     }
 
@@ -100,8 +114,7 @@ class Arrays{
         String s1 = s.length() < t.length() ? s : t;
         String s2 = s.length() < t.length() ? t : s;
         boolean diffChar = false;
-        int index1 = 0;
-        int index2 = 0;
+        int index1 = 0; int index2 = 0;
 
         while(index1 < s1.length()){
             if (s1.charAt(index1) != s2.charAt(index2)){
@@ -118,6 +131,41 @@ class Arrays{
         }
 
         return true;
+    }
+
+    static String compress(String str){
+        StringBuilder compressed = new StringBuilder();
+        int counter = 0;
+
+        for(int i=0; i<str.length(); i++){
+            counter++;
+            if (i==str.length()-1 || str.charAt(i)!=str.charAt(i+1)){
+                compressed.append(str.charAt(i));
+                compressed.append(counter);
+                counter = 0;
+            }
+        }
+
+        return compressed.length() < str.length() ? compressed.toString() : str;
+
+    }
+
+    static int[][] rotate(int[][] matrix){
+        int N = matrix.length;
+        
+        for(int layer = 0; layer < N/2; layer++){
+            int start = layer;
+            int end = N-1-layer;
+            for(int i = start; i < end; i++){
+                int offset = i - start;
+                int temp = matrix[i][end];
+                matrix[i][end] = matrix[start][i];
+                matrix[start][i] = matrix[end-offset][start];
+                matrix[end-offset][start] = matrix[end][end-offset];
+                matrix[end-offset][end] = temp;
+            }
+        }
+        return matrix;
     }
 
 }
