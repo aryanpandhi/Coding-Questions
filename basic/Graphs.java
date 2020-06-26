@@ -2,8 +2,11 @@ import java.util.ArrayList;
 
 class Graphs{
 
+    static ArrayList<ArrayList<Integer>> graph;
+    static boolean[] visited;
+
     public static void main(String[] args) {
-        ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>(6);
+        graph = new ArrayList<ArrayList<Integer>>(6);
         for (int i = 0; i<6;i++){
             graph.add(new ArrayList<Integer>());
         }
@@ -15,11 +18,19 @@ class Graphs{
         graph.get(2).add(1);
         graph.get(3).add(2);
         graph.get(3).add(4);
-        System.out.println(graph);
+        visited = new boolean[6];
+        System.out.println(DFSRecursive(0));
+
     } 
 
-    static int[] DFSRecursive(ArrayList<ArrayList<Integer>> graph){
-        return null;
+    static String DFSRecursive(Integer u){
+        visited[u] = true;
+        String visits = "";
+        for(Integer node: graph.get(u)){
+            if (!visited[node]) 
+                visits +=  DFSRecursive(node);
+        }
+        return Integer.toString(u) + " " + visits;
     }
 
     static int[] DFSIterative(ArrayList<ArrayList<Integer>> graph){
