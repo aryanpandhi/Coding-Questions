@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 class LinkedLists{
 
-    public static void main(String Args[]){
+    public static void main(String[] Args){
         LinkedList<Integer> li = new LinkedList<>();
         for(int i = 0; i<10000;i++){
             li.add(i/1000);

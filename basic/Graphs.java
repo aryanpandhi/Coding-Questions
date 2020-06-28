@@ -6,7 +6,7 @@ class Graphs{
     static boolean[] visited;
     static boolean[] discovered; // to avoid multiple copies on the stack/queue
 
-    public static void main(String[] args) {
+    public static void main(String[] Args) {
         int graphSize = 9;
         graph = new ArrayList<ArrayList<Integer>>(graphSize);
         for (int i = 0; i<graphSize; i++){
