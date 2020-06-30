@@ -6,44 +6,20 @@ class Graphs{
     static boolean[] visited;
     static boolean[] discovered; // to avoid multiple copies on the stack/queue
 
-    public static void main(String[] Args) {
-        int graphSize = 9;
-        graph = new ArrayList<ArrayList<Integer>>(graphSize);
+    Graphs(int graphSize){
+        graph =  new ArrayList<ArrayList<Integer>>(graphSize);
         for (int i = 0; i<graphSize; i++){
             graph.add(new ArrayList<Integer>());
         }
-        graph.get(1).add(2);
-        graph.get(1).add(5);
-        graph.get(1).add(7);
-        graph.get(2).add(3);
-        graph.get(2).add(5);
-        graph.get(3).add(5);
-        graph.get(4).add(5);
-        graph.get(4).add(6);
-        graph.get(7).add(5);
-        graph.get(7).add(8);
         visited = new boolean[graphSize];
         discovered = new boolean[graphSize];
-        // int graphSize = 6;
-        // graph = new ArrayList<ArrayList<Integer>>(graphSize);
-        // for (int i = 0; i<graphSize; i++){
-        //     graph.add(new ArrayList<Integer>());
-        // }
-        // graph.get(0).add(1);
-        // graph.get(0).add(4);
-        // graph.get(0).add(5);
-        // graph.get(1).add(3);
-        // graph.get(1).add(4);
-        // graph.get(2).add(1);
-        // graph.get(3).add(2);
-        // graph.get(3).add(4);
-        // visited = new boolean[graphSize];
-        // discovered = new boolean[graphSize];
-        System.out.println(BFSOptimized(1));
+    }
 
-    } 
+    void addEdge(int u, int v){
+        graph.get(u).add(v);
+    }
 
-    static LinkedList<Integer> DFSRecursive(int u){
+    LinkedList<Integer> DFSRecursive(int u){
         visited[u] = true;
         LinkedList<Integer> visits = new LinkedList<>();
         for(Integer node: graph.get(u)){
@@ -54,7 +30,7 @@ class Graphs{
         return visits;
     }
 
-    static LinkedList<Integer> DFSIterative(int u){
+    LinkedList<Integer> DFSIterative(int u){
         Stack<Integer> stack = new Stack<>();
         stack.push(u);
         LinkedList<Integer> visits = new LinkedList<>();
@@ -71,7 +47,7 @@ class Graphs{
         return visits;
     }
 
-    static LinkedList<Integer> DFSIterativeOptimized(int u){
+    LinkedList<Integer> DFSIterativeOptimized(int u){
         Stack<Integer> stack = new Stack<>();
         stack.push(u);
         LinkedList<Integer> visits = new LinkedList<>();
@@ -89,7 +65,7 @@ class Graphs{
         return visits;
     }
 
-    static LinkedList<Integer> BFS(int u){
+    LinkedList<Integer> BFS(int u){
         LinkedList<Integer> queue = new LinkedList<>();
         queue.add(u);
         LinkedList<Integer> visits = new LinkedList<>();
@@ -106,7 +82,7 @@ class Graphs{
         return visits;
     }
 
-    static LinkedList<Integer> BFSOptimized(int u){
+    LinkedList<Integer> BFSOptimized(int u){
         LinkedList<Integer> queue = new LinkedList<>();
         queue.add(u);
         LinkedList<Integer> visits = new LinkedList<>();
